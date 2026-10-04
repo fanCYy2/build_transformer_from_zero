@@ -1,41 +1,40 @@
-# CS336 Spring 2025 Assignment 1: Basics
+# Build Transformer From Zero
 
-For a full description of the assignment, see the assignment handout at
-[cs336_assignment1_basics.pdf](./cs336_assignment1_basics.pdf)
+从零实现一个 Transformer 语言模型，目前进度：BPE 分词器。
 
-If you see any issues with the assignment handout or code, please feel free to
-raise a GitHub issue or open a pull request with a fix.
+基于 Stanford CS336 Assignment 1 的作业框架与测试用例（见 [LICENSE](./LICENSE)）。
 
-## Setup
+## 目录结构
 
-### Environment
-We manage our environments with `uv` to ensure reproducibility, portability, and ease of use.
-Install `uv` [here](https://github.com/astral-sh/uv#installation) (recommended), or run `pip install uv`/`brew install uv`.
-We recommend reading a bit about managing projects in `uv` [here](https://docs.astral.sh/uv/guides/projects/#managing-dependencies) (you will not regret it!).
+```
+cs336_basics/
+├── pretokenization.py   # 语料分块 + 并行预分词
+├── train_bpe.py         # BPE 词表训练、合并、词表/合并规则的存储与读取
+├── converter.py         # bytes 与可见 unicode 字符的互相转换
+├── tokenizer.py         # Tokenizer（encode / decode，进行中）
+├── vocab.json           # 训练得到的词表
+└── merges.txt           # 训练得到的合并规则
+tests/                   # 单元测试，通过 tests/adapters.py 接入实现
+```
 
-You can now run any code in the repo using
+## 环境
+
+使用 [uv](https://github.com/astral-sh/uv) 管理环境：
+
 ```sh
 uv run <python_file_path>
 ```
-and the environment will be automatically solved and activated when necessary.
 
-### Run unit tests
-
+## 运行测试
 
 ```sh
 uv run pytest
 ```
 
-Initially, all tests should fail with `NotImplementedError`s.
-To connect your implementation to the tests, complete the
-functions in [./tests/adapters.py](./tests/adapters.py).
+## 数据
 
-### Download data
-Download the TinyStories data and a subsample of OpenWebText
-
-``` sh
-mkdir -p data
-cd data
+```sh
+mkdir -p data && cd data
 
 wget https://huggingface.co/datasets/roneneldan/TinyStories/resolve/main/TinyStoriesV2-GPT4-train.txt
 wget https://huggingface.co/datasets/roneneldan/TinyStories/resolve/main/TinyStoriesV2-GPT4-valid.txt
@@ -47,4 +46,3 @@ gunzip owt_valid.txt.gz
 
 cd ..
 ```
-
