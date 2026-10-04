@@ -1,6 +1,6 @@
 # Build Transformer From Zero
 
-从零实现一个 Transformer 语言模型，目前进度：BPE 分词器。
+从零实现一个 Transformer 语言模型。
 
 基于 Stanford CS336 Assignment 1 的作业框架与测试用例（见 [LICENSE](./LICENSE)）。
 
