@@ -16,6 +16,8 @@ from cs336_basics.embedding import Embedding
 from cs336_basics.rmsnorm import RMSnorm
 from cs336_basics.swiglu import silu, SwiGlu
 from cs336_basics.rope import RotaryPositionalEmbedding
+from cs336_basics.softmax import softmax
+from cs336_basics.scaled_dot_product_attention import attention
 
 def run_linear(
     d_in: int,
@@ -121,7 +123,7 @@ def run_scaled_dot_product_attention(
     Returns:
         Float[Tensor, " ... queries d_v"]: Output of SDPA
     """
-    raise NotImplementedError
+    return attention(Q, K, V, mask)
 
 
 def run_multihead_self_attention(
@@ -451,7 +453,7 @@ def run_softmax(in_features: Float[Tensor, " ..."], dim: int) -> Float[Tensor, "
         Float[Tensor, "..."]: Tensor of with the same shape as `in_features` with the output of
         softmax normalizing the specified `dim`.
     """
-    raise NotImplementedError
+    return softmax(in_features, dim)
 
 
 def run_cross_entropy(
