@@ -44,7 +44,7 @@ class MultiheadSelfAttention(torch.nn.Module):
                 k = self.rope(k, token_positions)
             
             # 生成mask
-            mask = torch.tril(torch.ones(q.shape[-2], k.shape[-2], dtype=torch.bool), diagonal= 0)
+            mask = torch.tril(torch.ones(q.shape[-2], k.shape[-2], dtype=torch.bool, device=q.device), diagonal= 0)
             # 注意力结果
             output = attention(q, k, v, mask)
             # 合并头
